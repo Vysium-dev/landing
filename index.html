@@ -21,7 +21,7 @@
     .container{width:min(calc(100% - 48px),var(--max));margin:0 auto;position:relative;z-index:2}
     .section{padding:94px 0;position:relative}
     .nav{position:sticky;top:0;z-index:60;backdrop-filter:blur(18px);background:rgba(8,8,8,.72);border-bottom:1px solid rgba(255,255,255,.06)}
-    .nav-inner{height:82px;display:flex;align-items:start;justify-content:space-between;gap:20px}
+    .nav-inner{height:82px;display:flex;align-items:center;justify-content:space-between;gap:20px}
     .brand{display:flex;align-items:center;gap:14px}
     .brand-logo{display:block;height:50px;width:auto;object-fit:contain;filter:drop-shadow(0 8px 18px rgba(0,0,0,.30))}
     .nav-links{display:flex;align-items:center;gap:26px;color:var(--muted);font-size:14px}
@@ -693,7 +693,7 @@
           <h2 style="margin-top:22px;position:relative;z-index:1">Sécurisez votre accès fondateur.</h2>
           <p style="position:relative;z-index:1">Vysium limite les accès à 100 places fondateurs. Les inscrits sur la liste seront notifiés en priorité à l’ouverture — et bénéficieront de l’offre tarifaire fondatrice à vie.</p>
           <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px;position:relative;z-index:1"><input type="email" placeholder="votre@email.com" style="min-height:52px;padding:0 22px;border-radius:999px;border:1px solid rgba(212,175,55,.30);background:rgba(255,255,255,.04);color:#f4efe6;font-size:15px;font-family:inherit;outline:none;width:320px;transition:border-color .2s ease,box-shadow .2s ease" onfocus="this.style.borderColor='rgba(212,175,55,.55)'" onblur="this.style.borderColor='rgba(212,175,55,.30)'" /><button class="btn btn-primary" onclick="handleWaitlist(this)" style="cursor:pointer;min-height:52px">Rejoindre la liste fondateur</button></div>
-          <p style="margin-top:16px;font-size:13px;color:var(--soft);position:relative;z-index:1;text-align:center">Soyez notifié en priorité de l’ouverture des accès fondateurs.</p>
+          <p data-waitlist-note style="margin-top:16px;font-size:13px;color:var(--soft);position:relative;z-index:1;text-align:center">Soyez notifié en priorité de l’ouverture des accès fondateurs.</p>
 
           <div class="scarcity" style="position:relative;z-index:1"><span class="dot"></span><span>Phase de pré-lancement &mdash; les 100 premiers accès sont attribués par ordre d’inscription</span></div>
         </div>
@@ -784,6 +784,12 @@
     el.style.color = color;
   }
 
+  // Masque les phrases statiques redondantes une fois l'inscription confirmée
+  function hideStaticNotes(wrap){
+    var notes = wrap.parentNode.querySelectorAll('[data-waitlist-note]');
+    for(var i=0;i<notes.length;i++){ notes[i].style.display='none'; }
+  }
+
   function isDuplicate(error){
     if(!error) return false;
     if(error.code === '23505') return true;
@@ -842,6 +848,7 @@
         return;
       }
       btn.textContent='Inscrit ✓';
+      hideStaticNotes(wrap);
       showMessage(wrap, 'Inscription confirmée. Vous serez notifié en priorité à l’ouverture des accès.', '#7fc98a');
     }).catch(function(){
       unlock();
