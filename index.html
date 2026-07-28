@@ -374,6 +374,80 @@
       /* keep footer clear of the sticky bar */
       .footer{padding-bottom:104px}
     }
+
+    /* ═══════════════════════════════════════════════════════════
+       MOBILE OPTIMISATION LAYER — phones only (≤700px).
+       Everything lives inside this single media query, appended
+       last, so the desktop cascade above is byte-for-byte intact.
+       ═══════════════════════════════════════════════════════════ */
+    @media (max-width:700px){
+
+      /* — 5. Hero typography: title on 2-3 lines instead of 6 — */
+      h1{font-size:clamp(29px,8.2vw,36px);line-height:1.06;letter-spacing:-.035em;margin-top:18px}
+      h2{font-size:clamp(25px,7.2vw,32px);line-height:1.12;letter-spacing:-.03em}
+      h3{font-size:19px}
+      .lead{font-size:16.5px;line-height:1.6;margin-top:16px}
+      .lead.tight{font-size:16px;margin-top:14px}
+      .hero-hook{font-size:17.5px;line-height:1.35;margin-top:18px;padding-left:14px}
+      .sub,.note{font-size:14px}
+      .eyebrow{font-size:11px;letter-spacing:.09em;min-height:32px;padding:0 12px}
+
+      /* — 1. Hero preview panel: flows under the form, no overlap — */
+      .hero{padding:24px 0 44px}
+      .hero-grid{margin-top:20px;gap:26px}
+      .hero-copy{padding-top:6px}
+      .hero-panel-wrap{top:0;margin-left:0;margin-top:8px;padding:10px}
+      .hero-panel{padding:15px;border-radius:20px}
+      .panel-header{margin-bottom:12px}
+      .mock-grid{gap:12px}
+      .chart-card{min-height:206px}
+      .chart-grid,.chart-card svg{height:118px}
+      .value{font-size:25px}
+      .small-text{font-size:12.5px}
+      .stats-strip{gap:8px;margin-top:12px}
+      .mini-chip{font-size:11px;padding:6px 9px}
+
+      /* — Waitlist forms: stacked full-width (fixed field overflow) — */
+      .button-row{gap:12px;margin-top:26px}
+      .wl-form{flex-direction:column;align-items:stretch!important;width:100%;gap:10px}
+      .wl-form input[type="email"]{width:100%!important;min-height:50px}
+      .wl-form .btn{width:100%;max-width:100%}
+
+      /* — 2. "22 / 5 / Live" cards: one per row, nothing clipped — */
+      .proof-3{grid-template-columns:1fr!important;gap:12px!important}
+      .proof-3 > div{padding:24px 22px!important}
+
+      /* — 3. "Cohérence des signaux" card: single column — */
+      .dim-wide{grid-template-columns:1fr!important;column-gap:0!important;padding:26px 22px!important}
+      .dim-wide .dim-tag,.dim-wide h3,.dim-wide p{grid-column:1!important;grid-row:auto!important}
+      .dim-wide h3{font-size:20px!important;margin-top:8px!important}
+      .dim-wide p{margin-top:16px!important;padding:16px 0 0!important;border-left:none!important;
+        border-top:1px solid rgba(212,175,55,.25)!important;font-size:15px!important;line-height:1.65!important}
+
+      /* — 4. Logo stays visible & tappable while the menu is open — */
+      body.m-open .nav{z-index:95;background:transparent;backdrop-filter:none;border-bottom-color:transparent}
+      body.m-open .brand{position:relative;z-index:96}
+
+      /* — 6. Consistent vertical rhythm, no dead gaps — */
+      .section{padding:54px 0}
+      .section + .section:before{width:64px}
+      .section-header{gap:14px}
+      .dim-grid,.engines,.showcase,.showcase-grid,.feature-grid,.faq-grid,.timeline,
+      .comparison,.comparison-grid,.compare-table,.proof-strip,.dual-cards,.quote-block{margin-top:26px}
+      .card,.faq-card,.persona-card,.pricing-card,.timeline-card,.comparison-col,.dim,.engine{padding:24px 22px}
+      .timeline-card{min-height:auto}
+      .quote-block{padding:26px 22px}
+      .quote-block p{font-size:20px;line-height:1.32}
+      .proof-cell{padding:26px 22px}
+      .engine-stat{padding:16px 14px}
+      .showcase-card{padding:16px}
+      .arch-credit{margin-top:36px;padding-top:24px;font-size:13px}
+      .final-cta{padding:38px 20px}
+      .final-cta p{font-size:15.5px;margin-top:16px}
+      .final-cta .button-row{margin-top:24px}
+      .scarcity{margin-top:18px;font-size:10.5px;letter-spacing:.14em}
+      .footer{padding:28px 0 104px}
+    }
   </style>
 </head>
 <body>
@@ -411,7 +485,7 @@
           <p class="hero-hook">Vous lisez 15 sources par jour. <b>Vysium en remplace 14.</b></p>
           <p class="lead">Dérivés, flux ETF, options, macroéconomie — une seule lecture de marché, mise à jour en continu.</p>
           <div class="button-row">
-            <div style="display:flex;gap:10px;align-items:center"><input type="email" placeholder="votre@email.com" style="min-height:48px;padding:0 18px;border-radius:999px;border:1px solid rgba(212,175,55,.30);background:rgba(255,255,255,.04);color:#f4efe6;font-size:14px;font-family:inherit;outline:none;width:260px;transition:border-color .2s ease,box-shadow .2s ease" onfocus="this.style.borderColor='rgba(212,175,55,.55)'" onblur="this.style.borderColor='rgba(212,175,55,.30)'" /><button class="btn btn-primary" onclick="handleWaitlist(this)" style="cursor:pointer">Rejoindre la liste</button></div>
+            <div class="wl-form" style="display:flex;gap:10px;align-items:center"><input type="email" placeholder="votre@email.com" style="min-height:48px;padding:0 18px;border-radius:999px;border:1px solid rgba(212,175,55,.30);background:rgba(255,255,255,.04);color:#f4efe6;font-size:14px;font-family:inherit;outline:none;width:260px;transition:border-color .2s ease,box-shadow .2s ease" onfocus="this.style.borderColor='rgba(212,175,55,.55)'" onblur="this.style.borderColor='rgba(212,175,55,.30)'" /><button class="btn btn-primary" onclick="handleWaitlist(this)" style="cursor:pointer">Rejoindre la liste</button></div>
             <a href="#moteurs" class="text-cta" style="margin-top:16px">Découvrir la plateforme →</a>
           </div>
           <p class="note"><span class="mono" style="color:var(--gold2);letter-spacing:.14em;text-transform:uppercase;font-size:11.5px">Phase de pré-lancement</span> &nbsp;·&nbsp; 100 accès fondateurs &nbsp;·&nbsp; Investisseurs actifs uniquement.</p>
@@ -454,7 +528,7 @@
         </div>
       </div>
       <div class="container" style="margin-top:36px">
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:0" aria-label="Validation historique">
+        <div class="proof-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:0" aria-label="Validation historique">
 
             <div style="position:relative;border-radius:20px;border:1px solid rgba(212,175,55,.22);background:linear-gradient(155deg,rgba(212,175,55,.07) 0%,rgba(212,175,55,.015) 50%,rgba(0,0,0,0) 100%);box-shadow:inset 0 1px 0 rgba(212,175,55,.30),0 20px 44px -12px rgba(0,0,0,.50);padding:28px 24px 26px;overflow:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s ease" onmouseover="this.style.transform='translateY(-3px)';this.style.borderColor='rgba(212,175,55,.42)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(212,175,55,.22)'">
               <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.65) 40%,rgba(212,175,55,.65) 60%,transparent)"></div>
@@ -656,7 +730,7 @@
             <h3>L’efficience de la tendance.</h3>
             <p>La tendance tient ou s’essouffle. La lecture quantitative, nette, immédiate.</p>
           </div>
-          <div class="dim" style="grid-column:span 12;display:grid;grid-template-columns:1fr 1fr;column-gap:64px;align-items:center;padding:38px 44px;background:linear-gradient(135deg,rgba(212,175,55,.09) 0%,rgba(212,175,55,.02) 100%);border-color:rgba(212,175,55,.35);min-height:auto">
+          <div class="dim dim-wide" style="grid-column:span 12;display:grid;grid-template-columns:1fr 1fr;column-gap:64px;align-items:center;padding:38px 44px;background:linear-gradient(135deg,rgba(212,175,55,.09) 0%,rgba(212,175,55,.02) 100%);border-color:rgba(212,175,55,.35);min-height:auto">
             <div class="dim-num">06</div>
             <div class="dim-tag" style="grid-column:1;grid-row:1">Cohérence des Signaux</div>
             <h3 style="grid-column:1;grid-row:2;font-size:clamp(18px,1.6vw,22px);margin-top:10px">Le filtre anti-piège.</h3>
@@ -692,7 +766,7 @@
           <span class="eyebrow" style="position:relative;z-index:1">Accès Fondateur</span>
           <h2 style="margin-top:22px;position:relative;z-index:1">Sécurisez votre accès fondateur.</h2>
           <p style="position:relative;z-index:1">Vysium limite les accès à 100 places fondateurs. Les inscrits sur la liste seront notifiés en priorité à l’ouverture — et bénéficieront de l’offre tarifaire fondatrice à vie.</p>
-          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px;position:relative;z-index:1"><input type="email" placeholder="votre@email.com" style="min-height:52px;padding:0 22px;border-radius:999px;border:1px solid rgba(212,175,55,.30);background:rgba(255,255,255,.04);color:#f4efe6;font-size:15px;font-family:inherit;outline:none;width:320px;transition:border-color .2s ease,box-shadow .2s ease" onfocus="this.style.borderColor='rgba(212,175,55,.55)'" onblur="this.style.borderColor='rgba(212,175,55,.30)'" /><button class="btn btn-primary" onclick="handleWaitlist(this)" style="cursor:pointer;min-height:52px">Rejoindre la liste fondateur</button></div>
+          <div class="wl-form" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px;position:relative;z-index:1"><input type="email" placeholder="votre@email.com" style="min-height:52px;padding:0 22px;border-radius:999px;border:1px solid rgba(212,175,55,.30);background:rgba(255,255,255,.04);color:#f4efe6;font-size:15px;font-family:inherit;outline:none;width:320px;transition:border-color .2s ease,box-shadow .2s ease" onfocus="this.style.borderColor='rgba(212,175,55,.55)'" onblur="this.style.borderColor='rgba(212,175,55,.30)'" /><button class="btn btn-primary" onclick="handleWaitlist(this)" style="cursor:pointer;min-height:52px">Rejoindre la liste fondateur</button></div>
           <p data-waitlist-note style="margin-top:16px;font-size:13px;color:var(--soft);position:relative;z-index:1;text-align:center">Soyez notifié en priorité de l’ouverture des accès fondateurs.</p>
 
           <div class="scarcity" style="position:relative;z-index:1"><span class="dot"></span><span>Phase de pré-lancement &mdash; les 100 premiers accès sont attribués par ordre d’inscription</span></div>
@@ -734,6 +808,10 @@
         a.addEventListener('click', function(){ setTimeout(closeMenu, 60); });
       });
     }
+    // Logo stays tappable above the overlay — close the menu before jumping to top
+    var brand = document.querySelector('.brand');
+    if(brand){ brand.addEventListener('click', function(){ closeMenu(); }); }
+
     // Esc closes the menu
     document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ closeMenu(); } });
 
