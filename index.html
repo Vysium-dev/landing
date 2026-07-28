@@ -447,6 +447,49 @@
       .final-cta .button-row{margin-top:24px}
       .scarcity{margin-top:18px;font-size:10.5px;letter-spacing:.14em}
       .footer{padding:28px 0 104px}
+
+      /* — 7. Comparison table → one self-contained block per dimension.
+             The column headers are dropped and re-injected inline above
+             each value, so every block carries its own context. — */
+      .compare-table.three{border:none;background:none;box-shadow:none;border-radius:0;overflow:visible}
+      .compare-table.three .compare-row:first-child{display:none}   /* header row → inline labels below */
+      .compare-table.three .compare-row{display:block;margin-bottom:14px;border:1px solid rgba(212,175,55,.18);
+        border-radius:16px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.022),rgba(255,255,255,.006))}
+      .compare-table.three .compare-row:last-child{margin-bottom:0}
+      .compare-table.three .compare-cell{padding:15px 18px;border-left:none;font-size:14.5px;line-height:1.5}
+      /* dimension name = block title */
+      .compare-table.three .compare-cell.dim-label{background:rgba(212,175,55,.08);color:var(--gold2);
+        border-bottom:1px solid rgba(212,175,55,.16);padding:12px 18px;font-size:11.5px;letter-spacing:.14em}
+      /* each value gets its column label back, stacked above it */
+      .compare-table.three .compare-cell:nth-child(2),
+      .compare-table.three .compare-cell.gold-side{display:flex;flex-direction:column;gap:7px}
+      .compare-table.three .compare-cell:nth-child(2):after,
+      .compare-table.three .compare-cell.gold-side:after{order:-1;font-family:"JetBrains Mono",ui-monospace,monospace;
+        font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+      .compare-table.three .compare-cell:nth-child(2):after{content:"Approche classique";color:var(--soft)}
+      .compare-table.three .compare-cell.gold-side:after{content:"Terminal Vysium";color:var(--gold2)}
+      /* Vysium side keeps its gold bar (:before) and gets a clear separation */
+      .compare-table.three .compare-cell.gold-side{border-top:1px solid rgba(212,175,55,.16);padding-left:20px}
+
+      /* — 8. Dashboard preview: internal alignment, no overflow — */
+      .showcase-meta{flex-wrap:wrap;gap:6px 10px;font-size:9.5px;letter-spacing:.12em}
+      .showcase-meta .right{letter-spacing:.10em}
+      .showcase-bar{gap:10px;padding:9px 12px}
+      .showcase-bar .dots{flex:0 0 auto}                       /* was being squeezed by the crumb */
+      .showcase-bar .crumb{flex:1 1 auto;min-width:0;text-align:center;font-size:9px;letter-spacing:.08em;
+        white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .showcase-bar > div:last-child{flex:0 0 auto;font-size:9.5px;letter-spacing:.10em}
+      .shot-body{padding:14px 13px 18px!important;font-size:11.5px!important}
+      .shot-flash{padding:11px 12px!important;gap:9px!important;margin-bottom:15px!important}
+      .shot-flash span:last-child{font-size:12.5px!important}
+      .shot-synth{flex-wrap:wrap!important;gap:8px!important;padding-bottom:12px!important}
+      .shot-verdict{font-size:15.5px!important;margin-top:15px!important}
+      .shot-badge{margin-top:11px!important}
+      .shot-alert{padding:11px 12px!important;gap:9px!important}
+      .shot-alert div span:first-child{font-size:12.5px!important}   /* main text only, not the "depuis 1h" stamp */
+      /* the 280px minimum track overflowed the frame on 320-375px screens */
+      .shot-factors{grid-template-columns:1fr!important;gap:16px!important;margin-top:18px!important}
+      .shot-impl{padding:13px 14px!important;margin-top:16px!important}
     }
   </style>
 </head>
@@ -634,30 +677,30 @@
                   <div class="crumb">vysium.io / terminal / synthèse</div>
                   <div>BTC · 24H</div>
                 </div>
-                <div style="padding:20px 22px 24px;background:linear-gradient(180deg,#0c0c0c,#090909);font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#b7ae9d;line-height:1.55">
-                  <div style="display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:12px;border:1px solid rgba(232,160,72,.25);background:linear-gradient(135deg,rgba(232,160,72,.08),rgba(232,160,72,.02));margin-bottom:18px">
+                <div class="shot-body" style="padding:20px 22px 24px;background:linear-gradient(180deg,#0c0c0c,#090909);font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#b7ae9d;line-height:1.55">
+                  <div class="shot-flash" style="display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:12px;border:1px solid rgba(232,160,72,.25);background:linear-gradient(135deg,rgba(232,160,72,.08),rgba(232,160,72,.02));margin-bottom:18px">
                     <span style="color:#e8a048;font-size:14px;flex:0 0 auto;margin-top:1px">⚡</span>
                     <span style="font-family:Inter,sans-serif;font-size:13px;color:#cfc6b3;line-height:1.5">Le VIX a reculé de 2,7 pts sur la dernière clôture — mouvement remarquable, haut de la distribution annuelle.</span>
                   </div>
-                  <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px solid rgba(212,175,55,.14)">
+                  <div class="shot-synth" style="display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px solid rgba(212,175,55,.14)">
                     <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8e8678">Synthèse</span>
                     <div style="display:flex;align-items:center;gap:8px">
                       <span style="width:7px;height:7px;border-radius:999px;background:#5b9bd5;box-shadow:0 0 10px rgba(91,155,213,.6)"></span>
                       <span style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#5b9bd5">Transition de régime</span>
                     </div>
                   </div>
-                  <div style="margin-top:18px;font-family:Inter,sans-serif;font-size:17px;font-weight:600;color:#f4efe6;line-height:1.35;letter-spacing:-.02em">Transition non résolue : portage solide, levier et cohérence fragiles.</div>
-                  <div style="margin-top:12px;padding:8px 12px;border-radius:8px;background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.14);display:inline-flex;align-items:center;gap:8px">
+                  <div class="shot-verdict" style="margin-top:18px;font-family:Inter,sans-serif;font-size:17px;font-weight:600;color:#f4efe6;line-height:1.35;letter-spacing:-.02em">Transition non résolue : portage solide, levier et cohérence fragiles.</div>
+                  <div class="shot-badge" style="margin-top:12px;padding:8px 12px;border-radius:8px;background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.14);display:inline-flex;align-items:center;gap:8px">
                     <span style="font-size:10.5px;letter-spacing:.12em;color:#efd78b">Biais constructif · Régime indéterminé</span>
                   </div>
-                  <div style="margin-top:14px;display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:12px;border:1px solid rgba(212,175,55,.18);background:rgba(212,175,55,.04)">
+                  <div class="shot-alert" style="margin-top:14px;display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:12px;border:1px solid rgba(212,175,55,.18);background:rgba(212,175,55,.04)">
                     <span style="color:#efd78b;font-size:13px;flex:0 0 auto;margin-top:1px">⚡</span>
                     <div>
                       <span style="font-family:Inter,sans-serif;font-size:13px;color:#cfc6b3;line-height:1.5">Levier non confirmé et cohérence inter-marchés rompue</span>
                       <span style="margin-left:8px;font-size:10px;color:#8e8678;letter-spacing:.10em">depuis 1h</span>
                     </div>
                   </div>
-                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:20px">
+                  <div class="shot-factors" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:20px">
                     <div>
                       <div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#9ad9a3;margin-bottom:12px;display:flex;align-items:center;gap:6px"><span style="font-size:11px">▲</span> Facteurs porteurs</div>
                       <div style="display:grid;gap:6px">
@@ -677,7 +720,7 @@
                       </div>
                     </div>
                   </div>
-                  <div style="margin-top:18px;padding:14px 16px;border-radius:12px;border:1px solid rgba(212,175,55,.16);background:linear-gradient(135deg,rgba(212,175,55,.06),rgba(212,175,55,.02))">
+                  <div class="shot-impl" style="margin-top:18px;padding:14px 16px;border-radius:12px;border:1px solid rgba(212,175,55,.16);background:linear-gradient(135deg,rgba(212,175,55,.06),rgba(212,175,55,.02))">
                     <div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#efd78b;margin-bottom:8px">Implication</div>
                     <div style="font-family:Inter,sans-serif;font-size:13.5px;color:#f4efe6;line-height:1.55;font-weight:500">Portage et tendance tiennent, mais le levier non confirmé menace l’équilibre.</div>
                   </div>
