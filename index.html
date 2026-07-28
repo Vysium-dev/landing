@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root{
       --bg:#080808;--bg2:#0d0d0d;--panel:#121212;--panel2:#171717;--text:#f4efe6;--muted:#b7ae9d;--soft:#8e8678;--gold:#d4af37;--gold2:#efd78b;--line:rgba(212,175,55,.20);--line2:rgba(255,255,255,.08);--shadow:0 24px 80px rgba(0,0,0,.38);--radius-xl:32px;--radius-lg:24px;--radius-md:18px;--max:1180px;
@@ -755,22 +756,99 @@
   })();
   </script>
 <script>
-function handleWaitlist(btn){
-  var input = btn.parentElement.querySelector('input[type="email"]');
-  if(!input || !input.value || !input.value.includes('@')){
-    input.style.borderColor='#e05545';
-    input.focus();
-    setTimeout(function(){ input.style.borderColor='rgba(212,175,55,.30)'; }, 2000);
-    return;
+(function(){
+  var SUPABASE_URL = 'https://yawmescwysecyrvyjyjy.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlhd21lc2N3eXNlY3lydnlqeWp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUyNjQwOTYsImV4cCI6MjEwMDg0MDA5Nn0.WeTbbkX19HH6tkxOcxcw_xMjFVwIy6Jhzf9HDcPuKkE';
+
+  var client = null;
+  function getClient(){
+    if(client) return client;
+    if(!window.supabase || !window.supabase.createClient) return null;
+    client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    return client;
   }
-  btn.textContent='Inscrit ✓';
-  btn.style.pointerEvents='none';
-  btn.style.opacity='.7';
-  input.disabled=true;
-  input.style.opacity='.5';
-  // TODO: send email to backend
-  console.log('Waitlist signup:', input.value);
-}
+
+  // Message zone injected right after the input+button row (no markup change needed)
+  function messageEl(wrap){
+    var el = wrap.nextElementSibling;
+    if(el && el.hasAttribute && el.hasAttribute('data-waitlist-msg')) return el;
+    el = document.createElement('div');
+    el.setAttribute('data-waitlist-msg','');
+    el.style.cssText = 'width:100%;flex-basis:100%;margin-top:12px;font-size:13.5px;line-height:1.5;text-align:inherit;position:relative;z-index:1';
+    wrap.parentNode.insertBefore(el, wrap.nextSibling);
+    return el;
+  }
+  function showMessage(wrap, text, color){
+    var el = messageEl(wrap);
+    el.textContent = text;
+    el.style.color = color;
+  }
+
+  function isDuplicate(error){
+    if(!error) return false;
+    if(error.code === '23505') return true;
+    var m = (error.message || '') + ' ' + (error.details || '');
+    return /duplicate key|already exists/i.test(m);
+  }
+
+  window.handleWaitlist = function(btn){
+    var wrap = btn.parentElement;
+    var input = wrap.querySelector('input[type="email"]');
+    if(!input || !input.value || !input.value.includes('@')){
+      if(input){
+        input.style.borderColor='#e05545';
+        input.focus();
+        setTimeout(function(){ input.style.borderColor='rgba(212,175,55,.30)'; }, 2000);
+      }
+      return;
+    }
+
+    var email = input.value.trim().toLowerCase();
+    var label = btn.textContent;
+
+    // Lock the form while the request is in flight (anti double-clic)
+    btn.disabled = true;
+    btn.style.pointerEvents='none';
+    btn.style.opacity='.7';
+    btn.textContent='Envoi…';
+    input.disabled = true;
+    input.style.opacity='.5';
+    showMessage(wrap, '', 'transparent');
+
+    function unlock(){
+      btn.disabled = false;
+      btn.style.pointerEvents='';
+      btn.style.opacity='';
+      btn.textContent = label;
+      input.disabled = false;
+      input.style.opacity='';
+    }
+
+    var sb = getClient();
+    if(!sb){
+      unlock();
+      showMessage(wrap, 'Connexion impossible. Vérifiez votre réseau et réessayez.', '#e05545');
+      return;
+    }
+
+    sb.from('waitlist').insert({ email: email }).then(function(res){
+      if(res.error){
+        unlock();
+        if(isDuplicate(res.error)){
+          showMessage(wrap, 'Cet email est déjà inscrit sur la liste.', '#efd78b');
+        } else {
+          showMessage(wrap, 'Une erreur est survenue. Merci de réessayer dans un instant.', '#e05545');
+        }
+        return;
+      }
+      btn.textContent='Inscrit ✓';
+      showMessage(wrap, 'Inscription confirmée. Vous serez notifié en priorité à l’ouverture des accès.', '#7fc98a');
+    }).catch(function(){
+      unlock();
+      showMessage(wrap, 'Erreur réseau. Vérifiez votre connexion et réessayez.', '#e05545');
+    });
+  };
+})();
 </script>
 </body>
 </html>
