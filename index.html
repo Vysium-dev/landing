@@ -6,7 +6,6 @@
   <title>Vysium — Le Terminal Quant du Bitcoin</title>
   <meta name="description" content="Vysium : une lecture structurée du marché Bitcoin, en français, contrôlée avant publication. À l’ouverture : une analyse toutes les ~2 h, chaque chiffre daté et sourcé." />
   <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     /* Polices hébergées sur le site (P-15) : Inter 4.1 et JetBrains Mono 2.304, licence SIL OFL 1.1 (fonts/). */
     @font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("fonts/InterVariable.woff2") format("woff2")}
@@ -878,10 +877,30 @@
   var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlhd21lc2N3eXNlY3lydnlqeWp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUyNjQwOTYsImV4cCI6MjEwMDg0MDA5Nn0.WeTbbkX19HH6tkxOcxcw_xMjFVwIy6Jhzf9HDcPuKkE';
 
   var client = null;
+  // supabase-js 2.117.2, hébergé sur le site (vendor/, licence MIT). Chargé au premier envoi seulement :
+  // la bibliothèque accède au stockage local dès son chargement (clé de test « lswt-… », réglage de diagnostic).
+  var SUPABASE_JS = 'vendor/supabase-js-2.117.2.js';
+  var loading = null;
+  function loadSupabase(){
+    if(window.supabase && window.supabase.createClient) return Promise.resolve();
+    if(!loading){
+      loading = new Promise(function(resolve, reject){
+        var s = document.createElement('script');
+        s.src = SUPABASE_JS;
+        s.onload = function(){ resolve(); };
+        s.onerror = function(){ loading = null; reject(new Error('supabase-js')); };
+        document.head.appendChild(s);
+      });
+    }
+    return loading;
+  }
   function getClient(){
     if(client) return client;
     if(!window.supabase || !window.supabase.createClient) return null;
-    client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // Aucune session gardée dans le navigateur (aucun compte ici) : le client garde tout en mémoire.
+    client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+      auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
+    });
     return client;
   }
 
@@ -947,14 +966,16 @@
       input.style.opacity='';
     }
 
-    var sb = getClient();
-    if(!sb){
-      unlock();
-      showMessage(wrap, 'Connexion impossible. Vérifiez votre réseau et réessayez.', '#e05545');
-      return;
-    }
-
-    sb.from('waitlist').insert({ email: email }).then(function(res){
+    loadSupabase().then(function(){
+      var sb = getClient();
+      if(!sb){
+        unlock();
+        showMessage(wrap, 'Connexion impossible. Vérifiez votre réseau et réessayez.', '#e05545');
+        return;
+      }
+      return sb.from('waitlist').insert({ email: email });
+    }).then(function(res){
+      if(!res) return;
       if(res.error){
         unlock();
         if(isDuplicate(res.error)){
