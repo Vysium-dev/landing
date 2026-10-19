@@ -1,0 +1,19 @@
+# Secrets — never commit
+*_mdp.txt
+*.mdp
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*secret*
+*password*
+*credentials*
+*.token
+
+# Local tooling
+.claude/settings.local.json
+.DS_Store
+Thumbs.db
