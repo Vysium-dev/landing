@@ -976,13 +976,11 @@
       return sb.from('waitlist').insert({ email: email });
     }).then(function(res){
       if(!res) return;
-      if(res.error){
+      // Adresse nouvelle ou déjà inscrite : même réponse (P-15, fin de l'énumération des inscrits).
+      // Limite : le code d'erreur de Supabase (doublon, 23505) reste visible dans les outils du navigateur.
+      if(res.error && !isDuplicate(res.error)){
         unlock();
-        if(isDuplicate(res.error)){
-          showMessage(wrap, 'Cet email est déjà inscrit sur la liste.', '#efd78b');
-        } else {
-          showMessage(wrap, 'Une erreur est survenue. Merci de réessayer dans un instant.', '#e05545');
-        }
+        showMessage(wrap, 'Une erreur est survenue. Merci de réessayer dans un instant.', '#e05545');
         return;
       }
       btn.textContent='Inscrit ✓';
