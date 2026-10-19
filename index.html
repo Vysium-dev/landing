@@ -5,11 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vysium — Le Terminal Quant du Bitcoin</title>
   <meta name="description" content="Vysium : une lecture structurée du marché Bitcoin, en français, contrôlée avant publication. À l’ouverture : une analyse toutes les ~2 h, chaque chiffre daté et sourcé." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
+    /* Polices hébergées sur le site (P-15) : Inter 4.1 et JetBrains Mono 2.304, licence SIL OFL 1.1 (fonts/). */
+    @font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("fonts/InterVariable.woff2") format("woff2")}
+    @font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/JetBrainsMono-Regular.woff2") format("woff2")}
+    @font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/JetBrainsMono-Medium.woff2") format("woff2")}
+    @font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/JetBrainsMono-SemiBold.woff2") format("woff2")}
     :root{
       --bg:#080808;--bg2:#0d0d0d;--panel:#121212;--panel2:#171717;--text:#f4efe6;--muted:#b7ae9d;--soft:#8e8678;--gold:#d4af37;--gold2:#efd78b;--line:rgba(212,175,55,.20);--line2:rgba(255,255,255,.08);--shadow:0 24px 80px rgba(0,0,0,.38);--radius-xl:32px;--radius-lg:24px;--radius-md:18px;--max:1180px;
     }
