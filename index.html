@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vysium — Le Terminal Quant du Bitcoin</title>
-  <meta name="description" content="Vysium : une lecture structurée du marché Bitcoin, en français, contrôlée avant publication. À l’ouverture : une analyse toutes les ~2 h sur des périodes closes, chaque chiffre daté et sourcé." />
+  <meta name="description" content="Vysium : une lecture structurée du marché Bitcoin, en français, contrôlée avant publication. À l’ouverture : une analyse toutes les ~2 h, chaque chiffre daté et sourcé." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -291,7 +291,7 @@
     /* Architecture closing credit — soft hairline + centered note */
     .arch-credit{margin:54px auto 0;max-width:640px;padding-top:30px;text-align:center;font-size:13.5px;line-height:1.65;color:var(--soft);border-top:1px solid rgba(212,175,55,.16);position:relative}
     .arch-credit:before{content:"";position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:80px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.55),transparent)}
-    /* Mockup framing label — "real capture" tag with live dot */
+    /* Mockup framing label — "example" tag with gold dot */
     .shot-tag{display:flex;align-items:flex-start;gap:9px;font-size:11.5px;line-height:1.5;color:var(--soft);letter-spacing:.005em;opacity:.8}
     .shot-tag:before{content:"";flex:0 0 auto;width:6px;height:6px;margin-top:6px;border-radius:999px;background:#d4af37;box-shadow:0 0 9px rgba(212,175,55,.45)}
 
@@ -413,7 +413,7 @@
       .wl-form input[type="email"]{width:100%!important;min-height:50px}
       .wl-form .btn{width:100%;max-width:100%}
 
-      /* — 2. "22 / 5 / Live" cards: one per row, nothing clipped — */
+      /* — 2. "22 / 5 / ~2 h" cards: one per row, nothing clipped — */
       .proof-3{grid-template-columns:1fr!important;gap:12px!important}
       .proof-3 > div{padding:24px 22px!important}
 
@@ -482,7 +482,7 @@
       .shot-verdict{font-size:15.5px!important;margin-top:15px!important}
       .shot-badge{margin-top:11px!important}
       .shot-alert{padding:11px 12px!important;gap:9px!important}
-      .shot-alert div span:first-child{font-size:12.5px!important}   /* main text only, not the "depuis 1h" stamp */
+      .shot-alert div span:first-child{font-size:12.5px!important}   /* main text only, not the date stamp */
       /* the 280px minimum track overflowed the frame on 320-375px screens */
       .shot-factors{grid-template-columns:1fr!important;gap:16px!important;margin-top:18px!important}
       .shot-impl{padding:13px 14px!important;margin-top:16px!important}
@@ -522,7 +522,7 @@
           <span class="eyebrow">Terminal Quant · Bitcoin</span>
           <h1>L’Équation Quant du Bitcoin. Épurée pour les Investisseurs Actifs.</h1>
           <p class="hero-hook">Dérivés, ETF, options, macro : <b>une seule lecture.</b></p>
-          <p class="lead">Une lecture structurée du marché Bitcoin, en français. À l’ouverture : une analyse toutes les ~2 h sur des périodes closes, chaque chiffre daté et sourcé.</p>
+          <p class="lead">Une lecture structurée du marché Bitcoin, en français. À l’ouverture : une analyse toutes les ~2 h, chaque chiffre daté et sourcé.</p>
           <div class="button-row">
             <div class="wl-form" style="display:flex;gap:10px;align-items:center"><input type="email" placeholder="votre@email.com" style="min-height:48px;padding:0 18px;border-radius:999px;border:1px solid rgba(212,175,55,.30);background:rgba(255,255,255,.04);color:#f4efe6;font-size:14px;font-family:inherit;outline:none;width:260px;transition:border-color .2s ease,box-shadow .2s ease" onfocus="this.style.borderColor='rgba(212,175,55,.55)'" onblur="this.style.borderColor='rgba(212,175,55,.30)'" /><button class="btn btn-primary" onclick="handleWaitlist(this)" style="cursor:pointer">Rejoindre la liste</button></div>
             <a href="#moteurs" class="text-cta" style="margin-top:16px">Découvrir la plateforme →</a>
@@ -543,19 +543,19 @@
             <div style="height:1px;background:linear-gradient(90deg,rgba(212,175,55,.22),rgba(212,175,55,.04));margin:16px 0 14px"></div>
             <div style="display:grid;gap:6px">
               <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:9px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)">
-                <span style="min-width:46px;color:#8e8678;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-family:'JetBrains Mono',monospace">Force</span>
+                <span style="min-width:46px;color:#8db99a;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-family:'JetBrains Mono',monospace">Force</span>
                 <span style="font-size:12.5px;color:#cfc6b3;line-height:1.4">Structure à terme ordonnée</span>
               </div>
               <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:9px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)">
-                <span style="min-width:46px;color:#8e8678;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-family:'JetBrains Mono',monospace">Force</span>
+                <span style="min-width:46px;color:#8db99a;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-family:'JetBrains Mono',monospace">Force</span>
                 <span style="font-size:12.5px;color:#cfc6b3;line-height:1.4">Nervosité des marchés actions faible</span>
               </div>
               <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:9px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)">
-                <span style="min-width:46px;color:#8e8678;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-family:'JetBrains Mono',monospace">Risque</span>
-                <span style="font-size:12.5px;color:#cfc6b3;line-height:1.4">Levier sans confirmation spot</span>
+                <span style="min-width:46px;color:#cf8f86;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-family:'JetBrains Mono',monospace">Risque</span>
+                <span style="font-size:12.5px;color:#cfc6b3;line-height:1.4">Accumulation de levier sans mouvement de prix</span>
               </div>
               <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:9px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)">
-                <span style="min-width:46px;color:#8e8678;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-family:'JetBrains Mono',monospace">Risque</span>
+                <span style="min-width:46px;color:#cf8f86;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-family:'JetBrains Mono',monospace">Risque</span>
                 <span style="font-size:12.5px;color:#cfc6b3;line-height:1.4">Cohérence inter-marchés en dégradation</span>
               </div>
             </div>
@@ -574,7 +574,7 @@
               <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:52px;line-height:.88;letter-spacing:-.055em;font-weight:700;background:linear-gradient(175deg,#f5e49a 0%,#d4af37 52%,#a07c18 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">22</div>
               <div style="height:1px;background:linear-gradient(90deg,rgba(212,175,55,.28),rgba(212,175,55,.04));margin:18px 0 14px"></div>
               <div style="font-size:13.5px;font-weight:600;color:#f4efe6;line-height:1.35;letter-spacing:-.01em">États de marché évalués à chaque analyse</div>
-              <div style="font-size:12px;color:#8e8678;margin-top:8px;line-height:1.65">Dérivés, volatilité, flux ETF, macro, price action</div>
+              <div style="font-size:12px;color:#8e8678;margin-top:8px;line-height:1.65">Dérivés, volatilité, flux ETF, macro, dynamique du prix</div>
             </div>
 
             <div style="position:relative;border-radius:20px;border:1px solid rgba(212,175,55,.22);background:linear-gradient(155deg,rgba(212,175,55,.07) 0%,rgba(212,175,55,.015) 50%,rgba(0,0,0,0) 100%);box-shadow:inset 0 1px 0 rgba(212,175,55,.30),0 20px 44px -12px rgba(0,0,0,.50);padding:28px 24px 26px;overflow:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s ease" onmouseover="this.style.transform='translateY(-3px)';this.style.borderColor='rgba(212,175,55,.42)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(212,175,55,.22)'">
@@ -593,7 +593,7 @@
 
               <div style="height:1px;background:linear-gradient(90deg,rgba(212,175,55,.28),rgba(212,175,55,.04));margin:18px 0 14px"></div>
               <div style="font-size:13.5px;font-weight:600;color:#f4efe6;line-height:1.35;letter-spacing:-.01em">Une analyse toutes les ~2 h, à l’ouverture</div>
-              <div style="font-size:12px;color:#8e8678;margin-top:8px;line-height:1.65">À l’ouverture : des périodes closes, chaque chiffre daté.</div>
+              <div style="font-size:12px;color:#8e8678;margin-top:8px;line-height:1.65">À l’ouverture : chaque chiffre daté et sourcé.</div>
             </div>
 
           </div>
@@ -615,7 +615,7 @@
           <div class="compare-row" role="row">
             <div class="compare-cell dim-label" role="cell">Indicateurs de risque</div>
             <div class="compare-cell" role="cell">Indicateurs isolés, sans contexte historique.</div>
-            <div class="compare-cell gold-side" role="cell">À l’ouverture : chaque mesure située dans son historique — rang, fenêtre, date.</div>
+            <div class="compare-cell gold-side" role="cell">À l’ouverture : chaque rang publié porte sa fenêtre et sa date.</div>
           </div>
           <div class="compare-row" role="row">
             <div class="compare-cell dim-label" role="cell">Flux institutionnels</div>
@@ -635,7 +635,7 @@
         <div class="section-header">
           <span class="eyebrow">Plateforme</span>
           <h2>Une Plateforme. Un Moteur d’Élite.</h2>
-          <p class="lead tight">Cinq dimensions croisées, 22 états évalués à chaque analyse : une lecture structurée du marché. À l’ouverture : une analyse toutes les ~2 h sur des périodes closes, chaque chiffre daté et sourcé.</p>
+          <p class="lead tight">Cinq dimensions croisées, 22 états évalués à chaque analyse : une lecture structurée du marché. À l’ouverture : une analyse toutes les ~2 h, chaque chiffre daté et sourcé.</p>
         </div>
         <div class="engines">
           <article class="engine">
@@ -693,24 +693,23 @@
                     <span style="color:#efd78b;font-size:12px;flex:0 0 auto;margin-top:1px">Δ</span>
                     <div>
                       <span style="font-family:Inter,sans-serif;font-size:13px;color:#cfc6b3;line-height:1.5">Changement depuis l’analyse précédente : levier non confirmé et cohérence inter-marchés rompue</span>
-                      <span style="margin-left:8px;font-size:10px;color:#8e8678;letter-spacing:.10em">depuis 07:05</span>
+                      <span style="margin-left:8px;font-size:10px;color:#8e8678;letter-spacing:.10em">analyse de 07:05</span>
                     </div>
                   </div>
                   <div class="shot-factors" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:20px">
                     <div>
-                      <div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#b7ae9d;margin-bottom:12px;display:flex;align-items:center;gap:6px">Forces</div>
+                      <div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8db99a;margin-bottom:12px;display:flex;align-items:center;gap:6px">Forces</div>
                       <div style="display:grid;gap:6px">
                         <div style="padding:9px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);font-family:Inter,sans-serif;font-size:12.5px;color:#cfc6b3;line-height:1.5;transition:border-color .2s ease,background .2s ease" onmouseover="this.style.borderColor='rgba(212,175,55,.28)';this.style.background='rgba(212,175,55,.05)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)';this.style.background='rgba(255,255,255,.02)'">Tendance modérée, efficience rendement/risque stable</div>
                         <div style="padding:9px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);font-family:Inter,sans-serif;font-size:12.5px;color:#cfc6b3;line-height:1.5;transition:border-color .2s ease,background .2s ease" onmouseover="this.style.borderColor='rgba(212,175,55,.28)';this.style.background='rgba(212,175,55,.05)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)';this.style.background='rgba(255,255,255,.02)'">Structure à terme ordonnée</div>
                         <div style="padding:9px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);font-family:Inter,sans-serif;font-size:12.5px;color:#cfc6b3;line-height:1.5;transition:border-color .2s ease,background .2s ease" onmouseover="this.style.borderColor='rgba(212,175,55,.28)';this.style.background='rgba(212,175,55,.05)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)';this.style.background='rgba(255,255,255,.02)'">Écart vol implicite/réalisée en resserrement</div>
                         <div style="padding:9px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);font-family:Inter,sans-serif;font-size:12.5px;color:#cfc6b3;line-height:1.5;transition:border-color .2s ease,background .2s ease" onmouseover="this.style.borderColor='rgba(212,175,55,.28)';this.style.background='rgba(212,175,55,.05)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)';this.style.background='rgba(255,255,255,.02)'">Nervosité des marchés actions faible</div>
-                        <div style="padding:9px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);font-family:Inter,sans-serif;font-size:12.5px;color:#cfc6b3;line-height:1.5;transition:border-color .2s ease,background .2s ease" onmouseover="this.style.borderColor='rgba(212,175,55,.28)';this.style.background='rgba(212,175,55,.05)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)';this.style.background='rgba(255,255,255,.02)'">Momentum en accélération, signal de courte durée</div>
                       </div>
                     </div>
                     <div>
-                      <div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#b7ae9d;margin-bottom:12px;display:flex;align-items:center;gap:6px">Risques</div>
+                      <div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#cf8f86;margin-bottom:12px;display:flex;align-items:center;gap:6px">Risques</div>
                       <div style="display:grid;gap:6px">
-                        <div style="padding:9px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);font-family:Inter,sans-serif;font-size:12.5px;color:#cfc6b3;line-height:1.5;transition:border-color .2s ease,background .2s ease" onmouseover="this.style.borderColor='rgba(212,175,55,.28)';this.style.background='rgba(212,175,55,.05)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)';this.style.background='rgba(255,255,255,.02)'">Levier en accumulation sans confirmation spot</div>
+                        <div style="padding:9px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);font-family:Inter,sans-serif;font-size:12.5px;color:#cfc6b3;line-height:1.5;transition:border-color .2s ease,background .2s ease" onmouseover="this.style.borderColor='rgba(212,175,55,.28)';this.style.background='rgba(212,175,55,.05)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)';this.style.background='rgba(255,255,255,.02)'">Accumulation de levier sans mouvement de prix</div>
                         <div style="padding:9px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);font-family:Inter,sans-serif;font-size:12.5px;color:#cfc6b3;line-height:1.5;transition:border-color .2s ease,background .2s ease" onmouseover="this.style.borderColor='rgba(212,175,55,.28)';this.style.background='rgba(212,175,55,.05)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)';this.style.background='rgba(255,255,255,.02)'">Cohérence inter-marchés en dégradation</div>
                         <div style="padding:9px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);font-family:Inter,sans-serif;font-size:12.5px;color:#cfc6b3;line-height:1.5;transition:border-color .2s ease,background .2s ease" onmouseover="this.style.borderColor='rgba(212,175,55,.28)';this.style.background='rgba(212,175,55,.05)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)';this.style.background='rgba(255,255,255,.02)'">Flux ETF en sorties durables sur 30 jours</div>
                       </div>
@@ -718,13 +717,13 @@
                   </div>
                   <div class="shot-impl" style="margin-top:18px;padding:14px 16px;border-radius:12px;border:1px solid rgba(212,175,55,.16);background:linear-gradient(135deg,rgba(212,175,55,.06),rgba(212,175,55,.02))">
                     <div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#efd78b;margin-bottom:8px">Implication</div>
-                    <div style="font-family:Inter,sans-serif;font-size:13.5px;color:#f4efe6;line-height:1.55;font-weight:500">Portage et tendance tiennent, mais le levier non confirmé menace l’équilibre.</div>
+                    <div style="font-family:Inter,sans-serif;font-size:13.5px;color:#f4efe6;line-height:1.55;font-weight:500">Les conditions actuelles ne permettent pas un diagnostic net : des forces favorables coexistent avec des risques actifs.</div>
                   </div>
                 </div>
               </div>
               <div class="showcase-caption">
                 <span class="shot-tag">EXEMPLE — valeurs d’illustration, sans rapport avec le marché du jour. À l’ouverture, chaque chiffre portera sa date et sa période.</span>
-                <h4>Dérivés, volatilité, flux ETF, macro, price action — condensés en une lecture. Pas un avis. Un constat.</h4>
+                <h4>Dérivés, volatilité, flux ETF, macro, dynamique du prix — condensés en une lecture. Pas un avis. Un constat.</h4>
               </div>
             </article>
             
@@ -743,7 +742,7 @@
             <div class="dim-num">01</div>
             <div class="dim-tag">Futures &amp; Dérivés</div>
             <h3>Pression institutionnelle modélisée.</h3>
-            <p>Où sont positionnés les gros. Où se concentre le risque de liquidation. Ce que le prix seul ne montre jamais.</p>
+            <p>Où sont positionnés les gros. Les liquidations réalisées chaque jour, et le côté qui domine. Ce que le prix seul ne montre jamais.</p>
           </div>
           <div class="dim">
             <div class="dim-num">02</div>
@@ -765,7 +764,7 @@
           </div>
           <div class="dim">
             <div class="dim-num">05</div>
-            <div class="dim-tag">Price Action Quant</div>
+            <div class="dim-tag">Dynamique du prix</div>
             <h3>L’efficience de la tendance.</h3>
             <p>La tendance tient ou s’essouffle. La lecture quantitative, nette, datée.</p>
           </div>
@@ -788,11 +787,11 @@
         <div class="faq-grid">
           <div class="faq-card">
             <h3>Est-ce un canal de signaux de trading classique ?</h3>
-            <p>Non. C’est un terminal d’analyse quantitative structurée — pas un canal d’alertes. L’analyse lit le marché à travers <span class="mono" style="color:var(--gold2)">5 dimensions</span> et <span class="mono" style="color:var(--gold2)">22 états</span> de microstructure, sur des périodes closes ; à l’ouverture, une analyse toutes les ~2 h. Vous recevez une lecture claire et datée, pas une opinion.</p>
+            <p>Non. C’est un terminal d’analyse quantitative structurée : il décrit le marché, il ne recommande rien. L’analyse lit le marché à travers <span class="mono" style="color:var(--gold2)">5 dimensions</span> et <span class="mono" style="color:var(--gold2)">22 états</span> de microstructure. À l’ouverture : une analyse toutes les ~2 h, chaque chiffre daté et sourcé. Vous recevez une lecture claire et datée, pas une opinion.</p>
           </div>
           <div class="faq-card">
             <h3>À qui s’adresse ce terminal ?</h3>
-            <p>Vous suivez Bitcoin activement. Vous voulez une lecture structurée pour prendre de meilleures décisions — sans passer par 15 sources différentes. Vysium est conçu pour ça.</p>
+            <p>Vous suivez Bitcoin activement. Vous voulez une lecture structurée pour prendre de meilleures décisions — sans recouper vous-même vos sources. Vysium est conçu pour ça.</p>
           </div>
           
           
