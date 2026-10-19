@@ -879,32 +879,26 @@
   var SUPABASE_URL = 'https://yawmescwysecyrvyjyjy.supabase.co';
   var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlhd21lc2N3eXNlY3lydnlqeWp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUyNjQwOTYsImV4cCI6MjEwMDg0MDA5Nn0.WeTbbkX19HH6tkxOcxcw_xMjFVwIy6Jhzf9HDcPuKkE';
 
-  var client = null;
-  // supabase-js 2.117.2, hébergé sur le site (vendor/, licence MIT). Chargé au premier envoi seulement :
-  // la bibliothèque accède au stockage local dès son chargement (clé de test « lswt-… », réglage de diagnostic).
-  var SUPABASE_JS = 'vendor/supabase-js-2.117.2.js';
-  var loading = null;
-  function loadSupabase(){
-    if(window.supabase && window.supabase.createClient) return Promise.resolve();
-    if(!loading){
-      loading = new Promise(function(resolve, reject){
-        var s = document.createElement('script');
-        s.src = SUPABASE_JS;
-        s.onload = function(){ resolve(); };
-        s.onerror = function(){ loading = null; reject(new Error('supabase-js')); };
-        document.head.appendChild(s);
+  // Envoi direct à l'API de la base, sans bibliothèque : une seule requête POST, sans cookie
+  // (credentials : omit), sans rien lire ni écrire dans le stockage du navigateur.
+  function sendWaitlist(email){
+    return fetch(SUPABASE_URL.replace(/\/+$/, '') + '/rest/v1/waitlist', {
+      method: 'POST',
+      credentials: 'omit',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ email: email })
+    }).then(function(r){
+      if(r.ok) return { error: null };
+      return r.json().catch(function(){ return {}; }).then(function(b){
+        b = b || {};
+        return { error: { status: r.status, code: b.code, message: b.message, details: b.details } };
       });
-    }
-    return loading;
-  }
-  function getClient(){
-    if(client) return client;
-    if(!window.supabase || !window.supabase.createClient) return null;
-    // Aucune session gardée dans le navigateur (aucun compte ici) : le client garde tout en mémoire.
-    client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-      auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
     });
-    return client;
   }
 
   // Message zone injected right after the input+button row (no markup change needed)
@@ -931,7 +925,7 @@
 
   function isDuplicate(error){
     if(!error) return false;
-    if(error.code === '23505') return true;
+    if(error.status === 409 || error.code === '23505') return true;
     var m = (error.message || '') + ' ' + (error.details || '');
     return /duplicate key|already exists/i.test(m);
   }
@@ -969,16 +963,7 @@
       input.style.opacity='';
     }
 
-    loadSupabase().then(function(){
-      var sb = getClient();
-      if(!sb){
-        unlock();
-        showMessage(wrap, 'Connexion impossible. Vérifiez votre réseau et réessayez.', '#e05545');
-        return;
-      }
-      return sb.from('waitlist').insert({ email: email });
-    }).then(function(res){
-      if(!res) return;
+    sendWaitlist(email).then(function(res){
       // Adresse nouvelle ou déjà inscrite : même réponse (P-15, fin de l'énumération des inscrits).
       // Limite : le code d'erreur de Supabase (doublon, 23505) reste visible dans les outils du navigateur.
       if(res.error && !isDuplicate(res.error)){
